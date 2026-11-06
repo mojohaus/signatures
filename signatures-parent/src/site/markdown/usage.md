@@ -1,0 +1,188 @@
+# Signature Usage
+
+<!--
+The MIT License
+
+Copyright (c) 2013 codehaus.org.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+
+# Usage
+
+Signatures can be used by [Animal Sniffer Maven Plugin](../../animal-sniffer-maven-plugin),
+[Animal Sniffer ANT Tasks](../../animal-sniffer/animal-sniffer-ant-tasks) or
+[Animal Sniffer Enforcer Rule](../../animal-sniffer/animal-sniffer-enforcer-rule)
+
+## With Animal Sniffer Maven Plugin
+
+To check your project against signature using the Animal Sniffer Maven Plugin,
+include the following configuration in your `pom.xml`
+
+```xml
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      ...
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <version>${animal-sniffer-version}</version>
+        ...
+        <executions>
+          ...
+          <execution>
+            <id>check-signature</id>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <signature>
+                <groupId>org.codehaus.mojo.signature</groupId>
+                <artifactId>${signature artifactId}</artifactId>
+                <version>${signature version}</version>
+              </signature>
+            </configuration>
+          </execution>
+          ...
+        <executions>
+        ...
+      </plugin>
+      ...
+    </plugins>
+    ...
+  </build>
+  ...
+</project>
+```
+
+## With Animal Sniffer ANT Tasks
+
+Download the signature from the [Maven Central Repository](http://repo1.maven.org/maven2/org/codehaus/mojo/signature/${project.artifactId}/${project.version})
+and configure the `check-signature` task to use the signature, e.g.
+
+```xml
+<project xmlns:as="antlib:org.codehaus.mojo.animal_sniffer">
+  <typedef uri="antlib:org.codehaus.mojo.animal_sniffer">
+    <classpath path="lib/animal-sniffer-ant-tasks-${animal-sniffer-version}.jar"/>
+  </typedef>
+  <target name="check-signature" depends="compile">
+    <as:check-signature signature="${signature artifactId}-${signature version}.signature">
+      <path path="classes"/>
+    </as:check-signature>
+  </target>
+</project>
+```
+
+Alternatively, you can use [Maven ANT Tasks](https://maven.apache.org/ant-tasks/index.html) to download the signatures
+for you automatically, e.g.
+
+```xml
+<project xmlns:as="antlib:org.codehaus.mojo.animal_sniffer" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+  <!-- define Maven ANT Tasks -->
+  <typedef uri="antlib:org.apache.maven.artifact.ant">
+    <classpath path="lib/maven-ant-tasks-2.0.10.jar"/>
+  </typedef>
+
+  <!-- define Animal Sniffer ANT Tasks -->
+  <typedef uri="antlib:org.codehaus.mojo.animal_sniffer">
+    <classpath path="lib/animal-sniffer-ant-tasks-${animal-sniffer-version}.jar"/>
+  </typedef>
+
+  <!-- define local repository location -->
+  <condition property="maven.repo.local" value="${maven.repo.local}" else="${user.home}/.m2/repository">
+    <isset property="maven.repo.local"/>
+  </condition>
+
+  <!-- configure local repository -->
+  <artifact:localRepository id="local.repository" path="${maven.repo.local}"/>
+
+  <!-- declare dependency -->
+  <artifact:dependencies filesetId="signatures.fileset">
+    <dependency groupId="org.codehaus.mojo.signature" artifactId="${signature artifactId}" version="${signature version}" type="signature"/>
+  </artifact:dependencies>
+
+  <target name="check-signature" depends="compile">
+    <as:check-signature signature="${org.codehaus.mojo.signature:${signature artifactId}:signature}">
+      <path path="classes"/>
+    </as:check-signature>
+  </target>
+</project>
+```
+
+## With Animal Sniffer Enforcer Rule Plugin
+
+To check your project against this signature using the Animal Sniffer Enforcer Rule,
+include the following configuration in your `pom.xml`
+
+```xml
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      ...
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>1.0-beta-1</version>
+        ...
+        <dependencies>
+            ...
+            <dependency>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>animal-sniffer-enforcer-rule</artifactId>
+                <version>${animal-sniffer-version}</version>
+            </dependency>
+            ...
+        </dependencies>
+        ...
+        <executions>
+           ....
+          <execution>
+            <id>check-signature</id>
+            <phase>test</phase>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <checkSignatureRule implementation="org.codehaus.mojo.animal_sniffer.enforcer.CheckSignatureRule">
+                  <signature>
+                    <groupId>org.codehaus.mojo.signature</groupId>
+                    <artifactId>${signature artifactId}</artifactId>
+                    <version>${signature version}</version>
+                  </signature>
+                </checkSignatureRule>
+              </rules>
+            </configuration>
+          </execution>
+          ...
+        </executions>
+        ...
+      </plugin>
+      ...
+    </plugins>
+    ...
+  </build>
+  ...
+</project>
+```
