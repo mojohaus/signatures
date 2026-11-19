@@ -39,7 +39,7 @@ This signature can be used by [Animal Sniffer Maven Plugin](../../animal-sniffer
 Downloading
 -----------
 
-This signature is hosted on the [Maven Central Repository](http://repo1.maven.org)
+This signature is hosted on the [Maven Central Repository](https://repo1.maven.org)
 with the following coordinates:
 
 | **Group Id** | `${project.groupId}` |
@@ -96,7 +96,7 @@ include the following configuration in your `pom.xml`
 With Animal Sniffer ANT Tasks
 -----------------------------
 
-Download the signature from the [Maven Central Repository](http://repo1.maven.org/maven2/org/codehaus/mojo/signature/${project.artifactId}/${project.version})
+Download the signature from the [Maven Central Repository](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/${project.artifactId}/${project.version})
 and configure the `check-signature` task to use the signature, e.g.
 
 ```xml
