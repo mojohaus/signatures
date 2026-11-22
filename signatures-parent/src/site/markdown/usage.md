@@ -26,9 +26,12 @@ THE SOFTWARE.
 
 # Usage
 
-Signatures can be used by [Animal Sniffer Maven Plugin](../../animal-sniffer-maven-plugin),
-[Animal Sniffer ANT Tasks](../../animal-sniffer/animal-sniffer-ant-tasks) or
-[Animal Sniffer Enforcer Rule](../../animal-sniffer/animal-sniffer-enforcer-rule)
+The examples below use the `java17` signature, version 1.0; replace them with the signature you need from the
+[list of released signatures](index.html).
+
+Signatures can be used by [Animal Sniffer Maven Plugin](https://www.mojohaus.org/animal-sniffer/animal-sniffer-maven-plugin/),
+[Animal Sniffer ANT Tasks](https://www.mojohaus.org/animal-sniffer/animal-sniffer-ant-tasks/) or
+[Animal Sniffer Enforcer Rule](https://www.mojohaus.org/animal-sniffer/animal-sniffer-enforcer-rule/)
 
 ## With Animal Sniffer Maven Plugin
 
@@ -45,7 +48,7 @@ include the following configuration in your `pom.xml`
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <version>${animal-sniffer-version}</version>
+        <version><!-- latest release --></version>
         ...
         <executions>
           ...
@@ -58,13 +61,13 @@ include the following configuration in your `pom.xml`
             <configuration>
               <signature>
                 <groupId>org.codehaus.mojo.signature</groupId>
-                <artifactId>${signature artifactId}</artifactId>
-                <version>${signature version}</version>
+                <artifactId>java17</artifactId>
+                <version>1.0</version>
               </signature>
             </configuration>
           </execution>
           ...
-        <executions>
+        </executions>
         ...
       </plugin>
       ...
@@ -77,16 +80,16 @@ include the following configuration in your `pom.xml`
 
 ## With Animal Sniffer ANT Tasks
 
-Download the signature from the [Maven Central Repository](http://repo1.maven.org/maven2/org/codehaus/mojo/signature/${project.artifactId}/${project.version})
+Download the signature from the [Maven Central Repository](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java17/1.0)
 and configure the `check-signature` task to use the signature, e.g.
 
 ```xml
 <project xmlns:as="antlib:org.codehaus.mojo.animal_sniffer">
   <typedef uri="antlib:org.codehaus.mojo.animal_sniffer">
-    <classpath path="lib/animal-sniffer-ant-tasks-${animal-sniffer-version}.jar"/>
+    <classpath path="lib/animal-sniffer-ant-tasks-1.29.1.jar"/>
   </typedef>
   <target name="check-signature" depends="compile">
-    <as:check-signature signature="${signature artifactId}-${signature version}.signature">
+    <as:check-signature signature="java17-1.0.signature">
       <path path="classes"/>
     </as:check-signature>
   </target>
@@ -105,7 +108,7 @@ for you automatically, e.g.
 
   <!-- define Animal Sniffer ANT Tasks -->
   <typedef uri="antlib:org.codehaus.mojo.animal_sniffer">
-    <classpath path="lib/animal-sniffer-ant-tasks-${animal-sniffer-version}.jar"/>
+    <classpath path="lib/animal-sniffer-ant-tasks-1.29.1.jar"/>
   </typedef>
 
   <!-- define local repository location -->
@@ -118,11 +121,11 @@ for you automatically, e.g.
 
   <!-- declare dependency -->
   <artifact:dependencies filesetId="signatures.fileset">
-    <dependency groupId="org.codehaus.mojo.signature" artifactId="${signature artifactId}" version="${signature version}" type="signature"/>
+    <dependency groupId="org.codehaus.mojo.signature" artifactId="java17" version="1.0" type="signature"/>
   </artifact:dependencies>
 
   <target name="check-signature" depends="compile">
-    <as:check-signature signature="${org.codehaus.mojo.signature:${signature artifactId}:signature}">
+    <as:check-signature signature="${org.codehaus.mojo.signature:java17:signature}">
       <path path="classes"/>
     </as:check-signature>
   </target>
@@ -131,7 +134,7 @@ for you automatically, e.g.
 
 ## With Animal Sniffer Enforcer Rule Plugin
 
-To check your project against this signature using the Animal Sniffer Enforcer Rule,
+To check your project against a signature using the Animal Sniffer Enforcer Rule,
 include the following configuration in your `pom.xml`
 
 ```xml
@@ -143,14 +146,14 @@ include the following configuration in your `pom.xml`
       ...
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>1.0-beta-1</version>
+        <version><!-- latest release --></version>
         ...
         <dependencies>
             ...
             <dependency>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-enforcer-rule</artifactId>
-                <version>${animal-sniffer-version}</version>
+                <version><!-- latest release --></version>
             </dependency>
             ...
         </dependencies>
@@ -168,8 +171,8 @@ include the following configuration in your `pom.xml`
                 <checkSignatureRule implementation="org.codehaus.mojo.animal_sniffer.enforcer.CheckSignatureRule">
                   <signature>
                     <groupId>org.codehaus.mojo.signature</groupId>
-                    <artifactId>${signature artifactId}</artifactId>
-                    <version>${signature version}</version>
+                    <artifactId>java17</artifactId>
+                    <version>1.0</version>
                   </signature>
                 </checkSignatureRule>
               </rules>
