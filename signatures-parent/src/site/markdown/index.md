@@ -51,6 +51,7 @@ production use.
 | [`org.codehaus.mojo.signature:java16`](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java16/) | 1.0 | Generic JavaSE version 1.6 signatures (before 1.6u18) |
 | [`org.codehaus.mojo.signature:java16`](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java16/) | 1.1 | Generic JavaSE version 1.6 signatures (after 1.6u18) |
 | [`org.codehaus.mojo.signature:java17`](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java17/) | 1.0 | Generic JavaSE version 1.7 signatures |
+| [`org.codehaus.mojo.signature:java18`](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java18/) | 1.0 | Generic JavaSE version 1.8 signatures |
 | [`org.codehaus.mojo.signature:java12-sun`](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java12-sun/) | 1.0 | Sun JavaSE version 1.2 signatures |
 | [`org.codehaus.mojo.signature:java13-sun`](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java13-sun/) | 1.0 | Sun JavaSE version 1.3 signatures |
 | [`org.codehaus.mojo.signature:java14-sun`](https://repo1.maven.org/maven2/org/codehaus/mojo/signature/java14-sun/) | 1.0 | Sun JavaSE version 1.4 signatures |
@@ -70,14 +71,15 @@ production use.
 
 ## Pre-release Signatures
 
-The following are pre-releases of signatures. They have had releases, but
-are not deemed ready for production use yet.
+The following signatures are in the repository but have no release on Maven Central yet,
+so they are not ready for production use.
 
 | **Signature** | **Version** | **Description** |
 |---|---|---|
 | **Java Mobile Edition Runtime Signatures** | | *Signatures of the Java Mobile Edition runtime.* |
 | **Java Enterprise Edition Runtime Signatures** | | *Signatures of the Java Enterprise Edition runtime.* |
-| [j2ee14](https://github.com/mojohaus/signatures/tree/master/j2ee14/) | 1.0-SNAPSHOT | Java 2 Enterprise Edition version 1.4 signatures |
+| [j2ee14](https://github.com/mojohaus/signatures/tree/master/j2ee14/) | not yet released | Java 2 Enterprise Edition version 1.4 signatures |
+| [javaee5](https://github.com/mojohaus/signatures/tree/master/javaee5/) | not yet released | Java Enterprise Edition version 5.0 signatures |
 | **Java Standard Edition Runtime Signatures** | | *Signatures of the Java Standard Edition runtime.* |
 | **Other Runtime Signatures** | | *Signatures of other APIs.* |
 
@@ -86,7 +88,7 @@ are not deemed ready for production use yet.
 These are signatures which have been contributed but have not gained the
 attention of users or a committer interested in seeing it released. If you
 are looking for a signature but do not see it in this list or the lists
-above, you should also check the [subversion repository](https://svn.codehaus.org/mojo/trunk/signatures/sandbox/) in case the signature
+above, you should also check the [source repository](https://github.com/mojohaus/signatures) in case the signature
 hasn't been added to the list below yet.
 
 | **Signature** | **Version** | **Description** |

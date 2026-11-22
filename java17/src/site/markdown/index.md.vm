@@ -32,9 +32,9 @@ ${project.description}
 Usage
 =====
 
-This signature can be used by [Animal Sniffer Maven Plugin](../../animal-sniffer-maven-plugin),
-[Animal Sniffer ANT Tasks](../../animal-sniffer/animal-sniffer-ant-tasks) or
-[Animal Sniffer Enforcer Rule](../../animal-sniffer/animal-sniffer-enforcer-rule)
+This signature can be used by [Animal Sniffer Maven Plugin](https://www.mojohaus.org/animal-sniffer/animal-sniffer-maven-plugin/),
+[Animal Sniffer ANT Tasks](https://www.mojohaus.org/animal-sniffer/animal-sniffer-ant-tasks/) or
+[Animal Sniffer Enforcer Rule](https://www.mojohaus.org/animal-sniffer/animal-sniffer-enforcer-rule/)
 
 Downloading
 -----------
@@ -63,7 +63,7 @@ include the following configuration in your `pom.xml`
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <version>${animal-sniffer-version}</version>
+        <version><!-- latest release --></version>
         ...
         <executions>
           ...
@@ -82,7 +82,7 @@ include the following configuration in your `pom.xml`
             </configuration>
           </execution>
           ...
-        <executions>
+        </executions>
         ...
       </plugin>
       ...
@@ -102,7 +102,7 @@ and configure the `check-signature` task to use the signature, e.g.
 ```xml
 <project xmlns:as="antlib:org.codehaus.mojo.animal_sniffer">
   <typedef uri="antlib:org.codehaus.mojo.animal_sniffer">
-    <classpath path="lib/animal-sniffer-ant-tasks-${animal-sniffer-version}.jar"/>
+    <classpath path="lib/animal-sniffer-ant-tasks-1.29.1.jar"/>
   </typedef>
   <target name="check-${project.artifactId}" depends="compile">
     <as:check-signature signature="${project.artifactId}-${project.version}.signature">
@@ -112,7 +112,7 @@ and configure the `check-signature` task to use the signature, e.g.
 </project>
 ```
 
-Alternatively, you can use [Maven ANT Tasks](http://maven.apache.org/ant-tasks/index.html) to download the signatures
+Alternatively, you can use [Maven ANT Tasks](https://maven.apache.org/ant-tasks/index.html) to download the signatures
 for you automatically, e.g.
 
 ```xml
@@ -124,7 +124,7 @@ for you automatically, e.g.
 
   <!-- define Animal Sniffer ANT Tasks -->
   <typedef uri="antlib:org.codehaus.mojo.animal_sniffer">
-    <classpath path="lib/animal-sniffer-ant-tasks-${animal-sniffer-version}.jar"/>
+    <classpath path="lib/animal-sniffer-ant-tasks-1.29.1.jar"/>
   </typedef>
 
   <!-- define local repository location -->
@@ -163,14 +163,14 @@ include the following configuration in your `pom.xml`
       ...
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>1.0-beta-1</version>
+        <version><!-- latest release --></version>
         ...
         <dependencies>
             ...
             <dependency>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-enforcer-rule</artifactId>
-                <version>${animal-sniffer-version}</version>
+                <version><!-- latest release --></version>
             </dependency>
             ...
         </dependencies>
